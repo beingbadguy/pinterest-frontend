@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Geist:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playwrite+IT+Moderna:wght@100..400&family=Shadows+Into+Light&display=swap");
+* {
+  /* font-family: "Geist", serif; */
+  /* font-family: "Lato", serif; */
+  /* font-family: "Shadows Into Light", serif; */
+  /* font-family: "Playwrite IT Moderna", serif; */
+  font-family: "DM Sans", serif;
+  user-select: none;
+}
+
+.hidescrollbar::-webkit-scrollbar {
+  width: 0px; /* Hide scrollbar width */
+}
+
+.hidescrollbar::-webkit-scrollbar-thumb {
+  background: red; /* Hide scrollbar color */
+}
+
+.hidescrollbar {
+  scrollbar-width: 0px; /* For Firefox */
+  -ms-overflow-style: 0px; /* For IE/Edge */
+}
