@@ -91,7 +91,7 @@ const UserPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-auto h-auto flex items-center justify-start flex-col mb-32 md:mb-20 ">
+    <div className="min-h-screen overflow-auto h-auto flex items-center justify-start flex-col mb-40 md:mb-20 ">
       <div className=" w-full py-4 flex items-center justify-between">
         <GoArrowLeft
           size={30}

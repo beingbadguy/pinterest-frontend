@@ -79,7 +79,7 @@ const SingleUserPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-auto h-auto flex items-center justify-start flex-col mb-36 md:mb-20 ">
+    <div className="min-h-screen overflow-auto h-auto flex items-center justify-start flex-col mb-40 md:mb-20 ">
       <div className=" w-full p-4 flex items-center justify-between">
         <GoArrowLeft
           size={30}

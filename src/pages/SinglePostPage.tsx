@@ -139,7 +139,7 @@ const SinglePostPage = () => {
   }, [hasFetched]);
 
   return (
-    <div key={id} className="mb-36 md:mb-20">
+    <div key={id} className="mb-40 md:mb-20">
       <div className="w-full flex items-center justify-between">
         <GoArrowLeft
           size={30}
