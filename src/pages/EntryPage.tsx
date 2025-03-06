@@ -44,17 +44,24 @@ const EntryPage = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }); // ✅ Fixed infinite re-render issue
+  });
+
 
   useEffect(() => {
     checkAuth();
   }, []);
+
+
 
   useEffect(() => {
     if (userData) {
       navigate("/");
     }
   }, [userData]);
+
+
+  // userData;     
+
 
   return (
     <div className="min-h-screen max-h-screen w-full  pt-3">

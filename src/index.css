@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Geist:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playwrite+IT+Moderna:wght@100..400&family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playwrite+IT+Moderna:wght@100..400&family=Shadows+Into+Light&display=swap");
 * {
   /* font-family: "Geist", serif; */
-  /* font-family: "Lato", serif; */
+  font-family: "Lato", serif;
   /* font-family: "Shadows Into Light", serif; */
   /* font-family: "Playwrite IT Moderna", serif; */
-  font-family: "DM Sans", serif;
+  /* font-family: "DM Sans", serif; */
+  /* font-family: "Inter", sans-serif; */
   user-select: none;
 }
 
@@ -14,6 +15,9 @@
 
 .hidescrollbar::-webkit-scrollbar-thumb {
   background: red; /* Hide scrollbar color */
+  border: none; /* Remove border */
+  width: 0px;
+  scrollbar-width: 0px;
 }
 
 .hidescrollbar {

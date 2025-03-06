@@ -47,7 +47,7 @@ const LayoutPage = () => {
           <div
             className="hover:bg-red-100 flex items-center justify-center transition-all duration-300 cursor-pointer w-full p-2 rounded"
             onClick={() => {
-              navigate("/");
+              navigate("/home");
             }}
           >
             <RiHome3Line size={25} />
@@ -55,7 +55,7 @@ const LayoutPage = () => {
           <div
             className="hover:bg-red-100 flex items-center justify-center transition-all duration-300 cursor-pointer w-full p-2 rounded"
             onClick={() => {
-              navigate("/explore");
+              navigate("/");
             }}
           >
             <MdOutlineExplore size={25} />
@@ -154,7 +154,11 @@ const LayoutPage = () => {
             ""
           )}
         </nav>
-        <div className="w-full overflow-y-auto h-screen px-4 ">
+        <div
+          className={`w-full overflow-y-auto h-screen  ${
+            pathname.includes("chat") ? "" : "px-4"
+          } `}
+        >
           <Outlet />
         </div>
       </div>

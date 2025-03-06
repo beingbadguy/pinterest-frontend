@@ -130,13 +130,12 @@ const usePinterestStore = create<PinterestStoreType>((set, get) => ({
     try {
       const response = await axiosInstance.get("/auth/me");
       set({ userData: response?.data?.user });
-      // const { userData } = get();
-      // console.log(userData);
       const { getAllPosts } = get();
       getAllPosts();
       const connectSocket = useSocketStore.getState().connectSocket;
       console.log("check auth ran");
       connectSocket();
+      // window.location.href = "/";
       // if (!userData?.isAccountVerified) {
       //   window.location.href = "/wall";
       // }

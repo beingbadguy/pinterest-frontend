@@ -1,11 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import usePinterestStore from "../store/store";
-// import useSocketStore from "../store/socket";
 
 const HomePage = () => {
   const { allPosts } = usePinterestStore();
-  // const { onlineUsers } = useSocketStore();
-  // console.log(onlineUsers);
   const navigate = useNavigate();
   return (
     <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-6 mb-34 md:mb-20">

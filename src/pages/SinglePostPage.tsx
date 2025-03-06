@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../api/axiosInstance";
 import { IoIosArrowDown, IoIosHeartEmpty } from "react-icons/io";
 import { IoDownloadOutline } from "react-icons/io5";
@@ -20,6 +20,7 @@ interface UserPropTyes {
   followers: string[];
   following: string[];
 }
+
 interface CommentPropTypes {
   createdAt: string;
   post: string;
@@ -29,6 +30,7 @@ interface CommentPropTypes {
   __v: 0;
   _id: string;
 }
+
 interface PostTypeProps {
   _id: string;
   comments: CommentPropTypes[];
@@ -40,11 +42,16 @@ interface PostTypeProps {
   title: string;
   description: string;
 }
+
 const SinglePostPage = () => {
   const { allPosts, getAllPosts, userData } = usePinterestStore();
   const [singlePost, setSinglePost] = useState<PostTypeProps>();
   const [text, setText] = useState<string>("");
   const [showComment, setShowComment] = useState<boolean>(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const { pathname } = useLocation();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const likeUnlikePost = async (postId: string) => {
     if (!id) {
@@ -53,17 +60,12 @@ const SinglePostPage = () => {
     }
     try {
       const response = await axiosInstance.post(`/post/like-unlike/${postId}`);
-      console.log(response?.data.post);
       setSinglePost(response.data.post);
-      // const { getAllPosts } = get();
-      // getAllPosts();
     } catch (error: any) {
       console.log(error.response);
     }
   };
-  console.log(singlePost);
-  const { id } = useParams();
-  const navigate = useNavigate();
+
   const fetchPostById = async (id: string) => {
     if (!id) {
       console.log("id is required");
@@ -71,7 +73,6 @@ const SinglePostPage = () => {
     }
     try {
       const response = await axiosInstance.get(`/post/get/${id}`);
-      // console.log(response.data.post);
       setSinglePost(response.data.post);
     } catch (error: any) {
       console.log(error.message);
@@ -91,7 +92,6 @@ const SinglePostPage = () => {
       await axiosInstance.post(`/comment/add/${id}`, {
         text,
       });
-      console.log("Comment added successfully");
       setText("");
       fetchPostById(id);
       getAllPosts();
@@ -100,57 +100,63 @@ const SinglePostPage = () => {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
-  // console.log(getPostOtherThanThisOne);
-  useEffect(() => {
-    if (id) {
-      fetchPostById(id);
-      getAllPosts();
-      setShowComment(false);
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    window.scrollTo(0, 0);
-  }, [id]);
-
   const downloadImage = async (url: string, e: React.MouseEvent) => {
     e.preventDefault();
     try {
       const response = await fetch(url);
-      const blob = await response.blob(); // Image ko blob mein convert kiya
+      const blob = await response.blob();
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob); // Blob ko URL mein convert kiya
-      link.download = "Pinterest-clone.jpg"; // Yaha apni image ka naam dedo
+      link.href = URL.createObjectURL(blob);
+      link.download = "Pinterest-clone.jpg";
       document.body.appendChild(link);
-      link.click(); // Actual download yahi se hoga
-      document.body.removeChild(link); // Cleanup
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
       console.error("Download failed:", error);
     }
   };
 
+  useEffect(() => {
+    const fetchDataAndScroll = async () => {
+      if (id) {
+        await fetchPostById(id);
+        await getAllPosts();
+        setHasFetched(true);
+      }
+    };
+
+    fetchDataAndScroll();
+  }, [id]);
+
+  useEffect(() => {
+    if (hasFetched) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+      setHasFetched(false);
+    }
+  }, [hasFetched]);
+
   return (
-    <div className="mb-36 md:mb-20">
-      <div className=" w-full flex items-center justify-between">
+    <div key={id} className="mb-36 md:mb-20">
+      <div className="w-full flex items-center justify-between">
         <GoArrowLeft
           size={30}
           className="cursor-pointer"
-          onClick={() => {
-            window.history.back();
-          }}
+          onClick={() => navigate(-1)}
         />
       </div>
-      <div className="flex items-start flex-col md:flex-row  w-full relative">
-        <div className="p-4 rounded-sm">
+      <div className="flex items-start flex-col md:flex-row w-full relative">
+        <div className="p-4 rounded-sm" style={{ minHeight: "400px" }}>
           <img
             src={singlePost?.imageUrl}
             alt={singlePost?.title}
-            className=" size-[400px] rounded-xl object-contain"
+            className="size-[400px] rounded-xl object-contain"
           />
         </div>
-        <div className="p-4 flex items-start justify-center flex-col ">
+        <div className="p-4 flex items-start justify-center flex-col">
           <div
             className="flex items-center justify-center gap-2 my-2 bg-gray-100 rounded p-2 cursor-pointer hover:bg-gray-200 transition-all duration-300"
             onClick={() => {
@@ -193,7 +199,7 @@ const SinglePostPage = () => {
             />
           </div>
           <h1 className="text-2xl font-bold">{singlePost?.title}</h1>
-          <p className="mt-q text-gray-500 ">{singlePost?.description}</p>
+          <p className="mt-2 text-gray-500">{singlePost?.description}</p>
           <div className="mt-1 flex items-center w-[300px] justify-between">
             <p className="font-bold">{singlePost?.comments.length} Comments</p>
             <p
@@ -207,7 +213,7 @@ const SinglePostPage = () => {
               }`}
             >
               <IoIosArrowDown
-                className={` ${
+                className={`${
                   showComment ? "" : "rotate-180"
                 } transition-all duration-300 cursor-pointer`}
                 size={20}
@@ -217,7 +223,7 @@ const SinglePostPage = () => {
           <div
             className={`hidescrollbar mt-2 flex flex-col gap-2 ${
               showComment ? "h-20" : "h-0"
-            }  transition-all duration-300 w-full overflow-y-scroll`}
+            } transition-all duration-300 w-full overflow-y-scroll`}
           >
             {singlePost?.comments.map((comment) => (
               <div key={comment._id} className="flex items-center gap-2">
@@ -246,7 +252,7 @@ const SinglePostPage = () => {
               onChange={(e) => {
                 setText(e.target.value);
               }}
-              className="border-none outline-none px-2 p-2 w-[250px] md:w-[300px]  "
+              className="border-none outline-none px-2 p-2 w-[250px] md:w-[300px]"
             />
             <div
               className="hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer p-1 rounded mr-3"
@@ -256,13 +262,13 @@ const SinglePostPage = () => {
                 }
               }}
             >
-              <AiOutlineSend className="cursor-pointer " />
+              <AiOutlineSend className="cursor-pointer" />
             </div>
           </div>
         </div>
       </div>
       <hr className="border border-gray-200" />
-      <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-6  mt-2">
+      <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-6 mt-2">
         {getPostOtherThanThisOne.map((post) => (
           <div
             key={post._id}

@@ -111,7 +111,7 @@ const ChatPage = () => {
 
   return (
     <div className="">
-      <div className=" rounded fixed w-full md:w-[89%] lg:w-[91%]">
+      <div className=" rounded fixed w-full md:w-[91%] lg:w-[93%]">
         <div className="flex items-center  relative cursor-pointer bg-gray-100 text-sm p-2 ">
           <div
             onClick={() => {
@@ -152,7 +152,7 @@ const ChatPage = () => {
         {messages.length > 0 ? (
           <div
             ref={chatContainerRef}
-            className="hidescrollbar bg-white my-2 mr-10 md:mr-2  pb-14 md:pb-0 max-h-[70vh] md:h-[70vh] overflow-y-scroll"
+            className="hidescrollbar bg-white my-2 mr-10 md:mr-2  pb-14 md:pb-0 max-h-[70vh] md:h-[70vh] overflow-y-scroll pl-3"
           >
             {messages.map((msg, index) => (
               <div
@@ -199,7 +199,7 @@ const ChatPage = () => {
 
         {/* send box  */}
         <div className="fixed bottom-14 md:bottom-0 py-4 w-full flex items-center justify-start bg-gray-50 rounded">
-          <div className="border border-gray-300 rounded-lg w-[90%] md:w-[85%] lg:w-[88%] md:ml-4 flex items-center">
+          <div className="border border-gray-300 rounded-lg w-[90%] md:w-[85%] lg:w-[88%] md:ml-4 flex items-center ml-4">
             <input
               type="text"
               placeholder="Type Something..."
