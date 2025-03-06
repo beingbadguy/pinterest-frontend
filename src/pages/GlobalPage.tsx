@@ -31,7 +31,7 @@ const GlobalPage = () => {
     getfollowedposts();
   }, []);
   return (
-    <div className="mb-40 md:mb-0">
+    <div className="mb-48 md:mb-0">
       <p className="font-semibold">Posts from followed users</p>
       {followedPost && followedPost.length > 0 ? (
         ""

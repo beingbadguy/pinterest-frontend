@@ -5,7 +5,7 @@ const HomePage = () => {
   const { allPosts } = usePinterestStore();
   const navigate = useNavigate();
   return (
-    <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-6 mb-40 md:mb-20">
+    <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-6 mb-48 md:mb-20">
       {allPosts.map((post) => (
         <div
           key={post._id}
