@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../api/axiosInstance";
 import { IoIosArrowDown, IoIosHeartEmpty } from "react-icons/io";
 import { IoDownloadOutline } from "react-icons/io5";
@@ -49,7 +49,6 @@ const SinglePostPage = () => {
   const [text, setText] = useState<string>("");
   const [showComment, setShowComment] = useState<boolean>(false);
   const [hasFetched, setHasFetched] = useState(false);
-  const { pathname } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -158,7 +157,7 @@ const SinglePostPage = () => {
         </div>
         <div className="p-4 flex items-start justify-center flex-col">
           <div
-            className="flex items-center justify-center gap-2 my-2 bg-gray-100 rounded p-2 cursor-pointer hover:bg-gray-200 transition-all duration-300"
+            className="flex items-center justify-center gap-2 my-2 bg-gray-100  p-2 cursor-pointer hover:bg-gray-200 transition-all duration-300 rounded-4xl"
             onClick={() => {
               navigate(`/singleuser/${singlePost?.user._id}`);
             }}
