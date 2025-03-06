@@ -3,7 +3,7 @@ import { AiOutlineLoading3Quarters, AiOutlineMail } from "react-icons/ai";
 import { MdOutlineAlternateEmail, MdOutlinePassword } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PiEyeSlashThin, PiEyeThin } from "react-icons/pi";
 import usePinterestStore from "../store/store";
 
@@ -15,8 +15,14 @@ interface UserPropTypes {
 }
 
 const SignupPage = () => {
-  const { isSigningUp, handleSignupError, signupError, signupUser } =
-    usePinterestStore();
+  const {
+    isSigningUp,
+    handleSignupError,
+    signupError,
+    signupUser,
+    checkAuth,
+    userData,
+  } = usePinterestStore();
   const [showPass, setShowPass] = useState<boolean>(false);
 
   const [user, setUser] = useState<UserPropTypes>({
@@ -49,12 +55,12 @@ const SignupPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   checkAuth();
-  //   if (userData) {
-  //     navigate("/");
-  //   }
-  // }, [userData])
+  useEffect(() => {
+    checkAuth();
+    if (userData) {
+      navigate("/");
+    }
+  }, [userData]);
 
   return (
     <div

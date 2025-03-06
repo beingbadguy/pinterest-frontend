@@ -53,7 +53,7 @@ const LoginPage = () => {
   useEffect(() => {
     checkAuth();
     if (userData) {
-      navigate("/");
+      navigate("/home");
     }
   }, [userData]);
 

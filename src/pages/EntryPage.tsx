@@ -55,7 +55,7 @@ const EntryPage = () => {
 
   useEffect(() => {
     if (userData) {
-      navigate("/");
+      navigate("/home");
     }
   }, [userData]);
 

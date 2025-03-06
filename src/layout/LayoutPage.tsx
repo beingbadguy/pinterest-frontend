@@ -147,7 +147,7 @@ const LayoutPage = () => {
               {/* <div className="text-center text-gray-500">No Results Found</div> */}
             </div>
           ) : searchQuery.length > 0 ? (
-            <div className="absolute w-[98%] rounded top-[80%] left-4 bg-gray-200  p-2 shadow-xl">
+            <div className="absolute w-[98%] rounded top-[80%] left-4 bg-gray-200  p-2 shadow-xl z-[9999]">
               <div className="text-center text-red-500">No Results Found</div>
             </div>
           ) : (
