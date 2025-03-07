@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { GoArrowLeft } from "react-icons/go";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../api/axiosInstance";
 import { IoIosArrowDown, IoIosHeartEmpty } from "react-icons/io";
 import { IoDownloadOutline } from "react-icons/io5";
@@ -48,9 +48,10 @@ const SinglePostPage = () => {
   const [singlePost, setSinglePost] = useState<PostTypeProps>();
   const [text, setText] = useState<string>("");
   const [showComment, setShowComment] = useState<boolean>(false);
-  const [hasFetched, setHasFetched] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const topRef = useRef<HTMLDivElement>(null);
 
   const likeUnlikePost = async (postId: string) => {
     if (!id) {
@@ -116,30 +117,24 @@ const SinglePostPage = () => {
   };
 
   useEffect(() => {
+    console.log("useEffect ran with ID:", id); // Debugging
     const fetchDataAndScroll = async () => {
       if (id) {
         await fetchPostById(id);
         await getAllPosts();
-        setHasFetched(true);
+      }
+
+      // Scroll to top after data is fetched
+      if (topRef.current) {
+        topRef.current.scrollIntoView({ behavior: "smooth" });
       }
     };
 
     fetchDataAndScroll();
-  }, [id]);
-
-  useEffect(() => {
-    if (hasFetched) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "auto",
-      });
-      setHasFetched(false);
-    }
-  }, [hasFetched]);
+  }, [id, location.key]);
 
   return (
-    <div key={id} className="mb-48 md:mb-20">
+    <div ref={topRef} key={id} className="mb-48 md:mb-20">
       <div className="w-full flex items-center justify-between">
         <GoArrowLeft
           size={30}

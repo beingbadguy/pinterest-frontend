@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/post/:id",
-        element: <SinglePostPage />,
+        element: <SinglePostPage key={Math.random()} />,
       },
       {
         path: "/updatepost/:id",

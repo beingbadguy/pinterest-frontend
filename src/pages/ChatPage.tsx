@@ -98,7 +98,7 @@ const ChatPage = () => {
     console.log("event running");
     if (socket) {
       socket.on("typing", (data) => {
-        console.log(data); // ✅ Yeh aa raha hai
+        // console.log(data); // ✅ Yeh aa raha hai
         setIsTyping(data.typing); // Yahi dikkat hai 😏
       });
     }

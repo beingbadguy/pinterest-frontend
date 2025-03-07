@@ -12,7 +12,7 @@ import useSocketStore from "../store/socket";
 
 const LayoutPage = () => {
   const { userData, logoutUser, allPosts } = usePinterestStore();
-  const { connectSocket } = useSocketStore();
+  const { connectSocket, isNewMessageReceived } = useSocketStore();
   const { pathname } = useLocation();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const navigate = useNavigate();
@@ -77,11 +77,17 @@ const LayoutPage = () => {
             <FaRegBell size={25} />
           </div>
           <div
-            className="hover:bg-red-100 flex items-center justify-center transition-all duration-300 cursor-pointer w-full p-2 rounded"
+            className="hover:bg-red-100 flex items-center justify-center transition-all duration-300 cursor-pointer w-full p-2 rounded relative"
             onClick={() => {
               navigate("/message");
+              useSocketStore.setState({ isNewMessageReceived: false });
             }}
           >
+            {isNewMessageReceived ? (
+              <div className="absolute size-2 sm:size-4 rounded-full bg-red-500 top-2 sm:right-12 right-11  md:right-3 md:size-2 " />
+            ) : (
+              ""
+            )}
             <AiOutlineMessage size={25} />
           </div>
         </div>

@@ -21,7 +21,7 @@ const GlobalPage = () => {
   const getfollowedposts = async () => {
     try {
       const response = await axiosInstance.get(`/post/getfollowedposts`);
-      console.log(response?.data);
+      // console.log(response?.data);
       setFollowedPost(response?.data.posts);
     } catch (error: any) {
       console.log(error.message);

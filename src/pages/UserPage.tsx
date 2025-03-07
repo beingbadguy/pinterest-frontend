@@ -54,7 +54,7 @@ const UserPage = () => {
         "/user/update-profile-picture",
         formData
       );
-      console.log(response.data.user);
+      // console.log(response.data.user);
       changeImage(null);
       checkAuth();
       getAllPosts();
@@ -69,10 +69,10 @@ const UserPage = () => {
       return;
     }
     try {
-      const response = await axiosInstance.put("/user/update-name", {
+      await axiosInstance.put("/user/update-name", {
         name,
       });
-      console.log(response.data.user);
+      // console.log(response.data.user);
       changeImage(null);
       checkAuth();
       getAllPosts();

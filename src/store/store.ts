@@ -55,6 +55,7 @@ interface PinterestStoreType {
   isPasswordChanging: boolean;
   isPostUploading: boolean;
   postError: string | null;
+
   allPosts: AllPostType[];
   allUsers: UserType[];
   getAllUsers: () => void;
@@ -85,6 +86,7 @@ const usePinterestStore = create<PinterestStoreType>((set, get) => ({
   changePasswordError: null,
   isPostUploading: false,
   postError: null,
+
   allPosts: [],
   allUsers: [],
   getAllUsers: async () => {
@@ -102,8 +104,8 @@ const usePinterestStore = create<PinterestStoreType>((set, get) => ({
       return;
     }
     try {
-      const response = await axiosInstance.post(`/post/like-unlike/${id}`);
-      console.log(response?.data);
+      await axiosInstance.post(`/post/like-unlike/${id}`);
+      // console.log(response?.data);
       const { getAllPosts } = get();
       getAllPosts();
     } catch (error: any) {

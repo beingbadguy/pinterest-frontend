@@ -44,7 +44,7 @@ const SingleUserPage = () => {
     }
     try {
       const response = await axiosInstance.get(`/user/user/${id}`);
-      console.log(response.data.user);
+      // console.log(response.data.user);
       setUser(response.data.user);
     } catch (error: any) {
       console.log(error?.response);

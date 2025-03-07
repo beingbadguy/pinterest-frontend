@@ -27,6 +27,7 @@ interface MessagesPropsType {
 
 interface SocketPropType {
   socket: Socket | null;
+  isNewMessageReceived: boolean;
   onlineUsers: string[];
   messages: MessagesPropsType[];
   selectedUser: UserType | null;
@@ -44,6 +45,7 @@ const useSocketStore = create<SocketPropType>((set, get) => ({
   onlineUsers: [],
   selectedUser: null,
   messages: [],
+  isNewMessageReceived: false,
 
   getMessages: async () => {
     const { selectedUser } = get();
@@ -66,6 +68,9 @@ const useSocketStore = create<SocketPropType>((set, get) => ({
     socket.on("newMessage", (message) => {
       // console.log("New Message:", message);
       const { messages } = get();
+
+      const prevLength = messages.length; // Previous array length
+
       set({
         messages: [
           ...messages,
@@ -76,6 +81,13 @@ const useSocketStore = create<SocketPropType>((set, get) => ({
           },
         ],
       });
+      // Check if new message arrived
+
+      const newLength = get().messages.length; // New array length
+      if (newLength > prevLength) {
+        set({ isNewMessageReceived: true });
+        console.log("New message received 🚨");
+      }
     });
   },
 

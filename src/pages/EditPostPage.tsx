@@ -36,7 +36,7 @@ const EditPostPage = () => {
         title,
         description,
       });
-      console.log(response.data);
+      // console.log(response.data);
       setIsEditing(false);
       navigate("/profile");
     } catch (error: any) {
