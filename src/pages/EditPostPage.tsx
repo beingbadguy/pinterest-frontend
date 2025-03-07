@@ -32,7 +32,7 @@ const EditPostPage = () => {
     // Update post data
     setIsEditing(true);
     try {
-      const response = await axiosInstance.put(`/post/update/${id}`, {
+      await axiosInstance.put(`/post/update/${id}`, {
         title,
         description,
       });

@@ -50,10 +50,7 @@ const UserPage = () => {
     try {
       const formData = new FormData();
       formData.append("image", image);
-      const response = await axiosInstance.put(
-        "/user/update-profile-picture",
-        formData
-      );
+      await axiosInstance.put("/user/update-profile-picture", formData);
       // console.log(response.data.user);
       changeImage(null);
       checkAuth();
