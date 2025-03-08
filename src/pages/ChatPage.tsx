@@ -107,7 +107,7 @@ const ChatPage = () => {
         socket.off("typing");
       }
     };
-  }, [socket]);
+  }, [socket, senderId, receiverId]);
 
   return (
     <div className="">
