@@ -152,7 +152,7 @@ const ChatPage = () => {
         {messages.length > 0 ? (
           <div
             ref={chatContainerRef}
-            className="hidescrollbar bg-white my-2 mr-1 md:mr-2  pb-14 md:pb-0 max-h-[70vh] md:h-[70vh] overflow-y-scroll pl-3"
+            className="hidescrollbar bg-white my-2 mr-1 md:mr-2  pb-24 md:pb-0 max-h-[70vh] md:h-[70vh] overflow-y-scroll pl-3"
           >
             {messages.map((msg, index) => (
               <div
