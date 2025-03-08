@@ -134,7 +134,7 @@ const SinglePostPage = () => {
   }, [id, location.key]);
 
   return (
-    <div ref={topRef} key={id} className="mb-48 md:mb-20">
+    <div ref={topRef} key={id} className="mb-72 md:mb-20">
       <div className="w-full flex items-center justify-between">
         <GoArrowLeft
           size={30}
