@@ -162,7 +162,7 @@ const SinglePostPage = () => {
               alt=""
               className="size-10 rounded-full object-cover"
             />
-            <p>@{singlePost?.user.username}</p>
+            <p>@{singlePost?.user?.username}</p>
           </div>
           <div className="flex items-center gap-4">
             <IoIosHeartEmpty
@@ -181,7 +181,7 @@ const SinglePostPage = () => {
                 }
               }}
             />
-            <p>{singlePost?.likes.length}</p>
+            <p>{singlePost?.likes?.length}</p>
             <IoDownloadOutline
               className="my-2 cursor-pointer hover:bg-gray-200 rounded-full p-2"
               size={45}
