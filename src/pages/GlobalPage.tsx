@@ -36,7 +36,7 @@ const GlobalPage = () => {
       {followedPost && followedPost.length > 0 ? (
         ""
       ) : (
-        <p className="w-full flex items-center justify-center text-red-400 h-50 text-center">
+        <p className="w-full flex items-center justify-center text-green-400 h-50 text-center">
           People you follow haven't posted anything
         </p>
       )}

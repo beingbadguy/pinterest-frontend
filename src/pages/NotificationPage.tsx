@@ -1,5 +1,5 @@
 const NotificationPage = () => {
-  return <div>NotificationPage</div>;
+  return <div>This section is under construction...</div>;
 };
 
 export default NotificationPage;
