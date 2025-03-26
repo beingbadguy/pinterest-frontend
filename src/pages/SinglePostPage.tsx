@@ -158,7 +158,7 @@ const SinglePostPage = () => {
             }}
           >
             <img
-              src={singlePost?.user.profilePic}
+              src={singlePost?.user?.profilePic}
               alt=""
               className="size-10 rounded-full object-cover"
             />
@@ -222,12 +222,12 @@ const SinglePostPage = () => {
             {singlePost?.comments.map((comment) => (
               <div key={comment._id} className="flex items-center gap-2">
                 <img
-                  src={comment.user.profilePic}
+                  src={comment?.user?.profilePic}
                   alt=""
                   className="size-8 rounded-full object-cover"
                 />
                 <div>
-                  <p className="font-bold">{comment.user.username}</p>
+                  <p className="font-bold">{comment?.user?.username}</p>
                   <p>{comment.text}</p>
                   <p className="text-gray-400 text-sm">
                     {formatDistanceToNow(new Date(comment.createdAt), {
